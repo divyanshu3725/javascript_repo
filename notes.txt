@@ -1,0 +1,83 @@
+---------
+W3SCHOOLS
+---------
+JavaScript is used to program the behavior of webpage.
+We don't need to download JavaScript it is already running in our browser, computer, table, smart phone.
+WHAT CAN JAVASCRIPT DO?
+- it can change HTML content (target.innerHTML = `${newInnerHtml}`)
+- it can change HTML attribute values (target.attributeName = 'newAttributeValue';)
+- it can change HTML style (CSS) (target.style.propName = 'valueName';)
+- it can hide HTML elements (target.visibility = 'hidden';)
+- it can show HTML elements (target.visibility = 'visible';)
+JavaScript is written inside the <script> tags
+<scipt> tag can be place in <head> and well as in the <body>
+Have <script> tag as the last element of the <body> element so that script is executed after the HTML has been rendered. It also improves the display speed, because script execution can slow down display.
+Advantages of using external JavaScript:
+- separate HTML and JavaScript
+- makes HTML and JavaScript easy to read and maintain
+- cached JavaScript files can speed up page loads
+How to reference external JavaScripts
+- with a full URL
+- with a file path
+- without any path
+Display Possibilities:
+- innerHTML (to access modify HTML)
+- document.write() (using it after HTML has been loaded with delete existing HTML)
+- window.alert() (window keyword can be skipped)
+- console.log() (for logging into the console)
+- window.print() (for print the content of the current window)
+JavaScript ignores multiple white spaces.
+Types of values: literals and varialbles
+Expression is a combination of literals, varialbles and operators
+// for single line comment
+/* */ for multi line comments
+Variable Naming Rules
+- can contains letters, digits, $, _
+- can't start with digits
+SQL is a non case sensitive programming language
+Variables can be declared with var, let or const
+Use const for constants
+Use let in general
+Avoid var
+Identifiers are names of Variables and functions
+We can declare and initialize many variable in one statement.
+Variable declared without a value is assigned undefined
+Variables declared with Var
+- have global scope
+- can be redeclared
+- can updated
+Variable declared with Let
+- have block scope
+- cannot be redeclared
+- can be updated
+Variables declared with Const
+- have block scope
+- cannot be redeclared
+- cannot be updated
+- must be initialized at the time of declaration
+We can change the elements of a constant array
+We can change the properties of a constant object
+* and / have higher predence than + and -
+Datatypes
+- number
+- null
+- string
+- symbol
+- bigint
+- boolean
+- undefined
+- object
+Object Datatype acn contain
+- object
+- array
+- date
+Adding a number and a string returns a string
+JavaScript numbers are always one type double (64 bit floating point)
+typeOf operator
+Parameters are listed inside the parenthesis in function definition
+Arguments are the values that are received by the function when it was invoked
+When a function reaches a return statement, it stops executing
+The () operator invokes the function
+Variables declared inside a function become local to the function
+
+// https://www.w3schools.com/js/js_objects.asp
