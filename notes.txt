@@ -81,3 +81,7 @@ The () operator invokes the function
 Variables declared inside a function become local to the function
 
 // https://www.w3schools.com/js/js_objects.asp
+
+
+
+NAMASTE JAVASCRIPT
