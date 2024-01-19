@@ -1,0 +1,5 @@
+Day 1 done (17/01/23)
+- w3 schools 
+Day 2 done (18/01/23)
+- Ep1: how javascript works?
+- Ep2: how javascript code is executed?
