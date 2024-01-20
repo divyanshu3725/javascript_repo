@@ -3,3 +3,12 @@ Day 1 done (17/01/23)
 Day 2 done (18/01/23)
 - Ep1: how javascript works?
 - Ep2: how javascript code is executed?
+Day 3 done (19/01/23)
+- Ep3: hoisting in javascript
+- Ep4: how functions work in JS
+- Ep5: shortest JS program 
+- Ep6: undefined v/s not defined in JS
+Day 4 done (20/01/23)
+- Ep7: scope chain, scope and lexical environment in JS
+- Ep8: let and const in JS
+- Ep9: block scope and shadowing in JS

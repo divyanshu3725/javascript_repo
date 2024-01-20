@@ -82,9 +82,291 @@
 // - machine stack
 
 // HOISTING
-getName();
-console.log(a);
-var a = 2;
-function getName(){
-    console.log("Nmaste London");
-};
+// EXAMPLE 1 
+// getName();
+// console.log(a);
+// var a = 2;
+// function getName(){
+//     console.log("Nmaste London");
+// };
+// this won't throw error
+// EXAMPLE 2
+// getName();
+// console.log(a);
+// function getName(){
+//     console.log("Nmaste London");
+// };
+// this will throw erro
+// undefined and not define are not the same thing
+// hoisting is phenomena in javascript by which we can access variables and functions before we have init them we can access them without any error
+// EXAMPLE 3
+// console.log(a)
+// console.log(getName)
+// var a = 7;
+// function getName(){
+//     console.log('namaste javascript');
+// };
+// the reason behind this behavior is lies in the memory creation phase of EC
+// in the memory creation phase varialbe are allocated memory and assigned undefined so we get undefined on console.log(a)
+// in the memory creation phase functions are allocated memory and assigned the whole function definition, so we get the whole function definition on console.log(getName)
+// console.log(a)
+// console.log(getName)
+// var a = 7;
+// var getName = () => {
+//     console.log('namaste javascript');
+// };
+// now we will get undefine for both logs
+// because the getName variable witll be alloted memory but will be assigned undefined (it is handled like a normal variable)
+// EXAMPLE FOR UNDERSTANDING THE WORKING OF CALLSTACK AND EXECUTION CONTEXTS
+// var x = 7;
+// function getName(){
+//     console.log("Namaste Javascript");
+// };
+// getName();
+// console.log("Hi");
+
+// HOW FUNCTION WORK IN JS
+// EXAMPLE 1 
+// var x = 1;
+// a();
+// b();
+// console.log(x);
+// function a(){
+//     var x = 10;
+//     console.log(x);
+// }
+// function b(){
+//     var x = 100;
+//     console.log(x);
+// }
+// inside the EC of a x is 10, doing console.log(x) will make javascript to search for value of x in the local environment, javascript find the value as 10, so 10 is logged
+// similarly 100 is logged for console.log(x) of function b
+// when these two ECs are deleted, console.log(x) of GEC is executed, value is set to 1, so 1 is logged into the console.
+
+// SHORTEST JAVASCRIPT PROGRAM
+// javascript will create the GEC for sure
+// whenever javascript progrm is run a GEC is created, a global object is created, and a this keyword is creaetd
+// and in the global space this refers to the global object 
+// the global object in case of browsers is the window object
+// window object contains a lot of functions and variable which can be accessed from anywhere in the code
+// global object for different environments is different
+// global space: region of code outside any function
+// whenever we create a variable or a function in the global space, they are attached to the window object
+// EXAMPLE 1
+// var a = 2;
+// function b(){
+//     console.log('hi')
+// };
+// variables declared with let and const keyword are not attached to the global object
+// whenever we use a variable or a function without anything in from of it, javascript engine assumes that the thing we are trying to access is present in the global space
+// EXAMPLE 2
+// var a = 2;
+// function b(){
+//     var x = 3;
+//     console.log(x);
+// };
+// b();
+// console.log(this.a)
+// console.log(x);
+// this will throw error
+
+// UNDEFINED
+// console.log(a);
+// var a = 7;
+// console.log(a);
+// undefined is a like a placeholder which is assigned to variables at the time of memory creation phase
+// undefined remains assigned to varialbes untill the code execution reaches the line where the variable has been initialized
+// undefined indicates that some memory has been allocated
+// javascript is loosely or weakly typed language
+// console.log(a);
+// var a = 2;
+// console.log(a);
+// a = true;
+// console.log(a);
+// NEVER DO THIS
+// a = undefined;
+// it is a bad practice
+
+// SCOPE CHAIN
+// scope in JavaScript is directly related to lexical environment
+// EXAMPLE 1
+// function a(){
+//     console.log(b);
+// };
+// var b = 10;
+// a();
+// javascript will try to find out whether b exists in local memory space (local memory of the function a's execution context) or not
+// if it isn't found there javascript will search for it in the 
+// EXAMPLE 2
+// function a(){
+//     c();
+//     function c(){
+//         console.log(b);
+//     };
+// };
+// var b = 10;
+// a();
+// EXAMPLE 3
+// function a(){
+//     var b = 10;
+//     c();
+//     function c(){
+//         console.log(b);
+//     };
+// };
+// a();
+// EXAMPLE 4
+// function a(){
+//     var b = 10;
+//     c();
+//     function c(){
+//     };
+// };
+// a();
+// console.log(b);
+// this will throw an error
+// scope of a variable is the region in code where that variable is accessible
+// whenever an EC is created an LE is also created
+// LE is the local memory along with the LE of parent
+// parent means lexical parent
+// function c is lexically inside function a 
+// scope chain is the chain of scopes that javascript engine iterates through in order to find the value of a variable when it is referenced
+// EXAMPLE 5 
+// function a(){
+//     var b = 10;
+//     c();
+//     function c(){
+//         console.log(b);
+//     };
+// };
+// a();
+
+// LET AND CONST
+// let and const declarations are hoisted
+// EXAMPLE 1
+// console.log(b);
+// let a = 10;
+// var b = 100;
+// EXAMPLE 2
+// console.log(a);
+// let a = 10;
+// var b = 100;
+// we get an error
+// a is hoisted (memory has been allocated to a)
+// b is also hoisted
+// they why did we get an error
+// EXAMPLE 3
+// let a = 10;
+// console.log(a);
+// var b = 100;
+// a is hoisted but not in the global scope
+// TEMPORAL DEAD ZONE
+// a variable declared with let enters temporal dead zone after it has been hoisted  
+// and it exists TDZ when the code execution reaches the statement where the variable is to be initialized
+// trying to access a variable present in the temporal dead zone throws a reference error: cannot access a before initialization
+// trying to access b will return undefined
+// trying to access an undeclared variable will throw a reference error: m is not defined
+// PROOF THAT B IS ATTACHED TO WINDOW OBJECT BUT A IS NOT ATTACHED TO IT
+// EXAMPLE 4
+// let a = 10;
+// var b = 100;
+// console.log(window.a) // this will give undefined
+// console.log(window.b)
+// so let is more strict than var
+// CONST IS MORE STRICT 
+// EXAMPLE 5
+// const a;
+// this will throw error
+// const needs to be initialized at the time of declaration
+// const is hoisted in a similar way
+// EXAMPLE 6
+// console.log(a);
+// const a = 2;
+// EXAMPLE 7
+// const a = 2;
+// a = 3;
+// this will throw a type error: we cannot assign something to a constant
+// SYNTAXERROR v/s TYPERROR v/s REFERENCEERROR
+// we got typerror when we were trying to assign a value to a constant, this error was thrown because of the sole reason that type of a is const 
+// we get a syntaxerror when we declare a const variable without initialization, this error was thrown because of sole reason that syntax of const needs an initialization
+// we get a syntaxerror when we re-declare a let or const variable, this error was thrown because of the sole reason that syntax of const needs an initialization
+// we get a referenceerror when we try to access a varialbe present in the temporal dead zone, this error was thrown because of the sole reason that javascript engine couldn't find the reference of a
+// we get a referenceerror when we try to access an undeclared variable, this error was thrown because of the sole reason that javascript engine couldn't find the reference of m
+// USE CONST
+// IF VALUE COULD CHANGE, USE LET
+// DON'T USE VAR UNTILL WE NEED THEM SPECIFILCALLY
+// best was to avoid TDZ is to put declarations and initializations at the top of the their corresponding scopes
+
+// BLOCK SCOPE AND SHADOWING IN JS
+// what is a block
+// a block is also known as compound statement
+// a block is used to group multiple statements together
+// we need to group multiple statements together when we need to supply multiple statement where javascript expects a single statement
+// EXAMPLE 1
+// var a = 3;
+// if(a == 2) console.log('it is true')
+// else console.log('it is false');
+// this is valid syntax
+// what is block scope?
+// EXAMPLE 2
+// {
+//     var a = 2;
+//     let b = 3;
+//     const c = 4;
+//     console.log(a);
+//     console.log(b);
+//     console.log(c);
+// }
+// console.log(a);
+// console.log(b);
+// console.log(c);
+// b and c will be hoisted in their scope ( a separate memory space )
+// a is hoisted in the globa scope
+// b and c are stored in a separate memory space which is reserved for this block
+// SHADOWING IN JAVASCRIPT
+// var a = 100;
+// let b = 200;
+// console.log(a);
+// console.log(b);
+// {
+//     var a = 10;
+//     let b = 20;
+//     const c= 30;
+//     console.log(a);
+//     console.log(b);
+// }
+// console.log(a);
+// console.log(b);
+// the value 10 shadowed the value 100
+// this because the var a = 100 and var a = 10; refered to the same space in memory
+// this won't happen with let variable
+// because the let b = 200; and let b = 20 refered to different spaces in memory
+// this all were legal shadowing
+// ILLEGAL SHADOWING
+// EXAMPLE 1
+// let a = 2;
+// {
+//     var a = 3;
+// };
+// EXAMPLE 2
+// const a = 2;
+// {
+//     var a = 3;
+// };
+// LEGAL SHADOWING
+// EXAMPLE 1
+// const a = 2;
+// {
+//     let a = 3;
+// };
+// EXAMPLE 2
+// let a = 2;
+// {
+//     const a = 3;
+// };
+// WHAT DIFFERENTIATE BETWEEN LEGAL AND ILLEGAL SHADOWING
+// if some variable is shadowing another variable then the inner variable should cross it's boundaries
+// var cannot be used to shadow let or const because var will cross the borders 
+// but let and const can be used to shadown any varialble because they won't cross their borders
+// block scope also follows lexical scope
+// all the scope rules that work on functions are valid for arrow functions also
