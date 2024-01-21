@@ -12,3 +12,6 @@ Day 4 done (20/01/23)
 - Ep7: scope chain, scope and lexical environment in JS
 - Ep8: let and const in JS
 - Ep9: block scope and shadowing in JS
+Day 5 done (21/01/23)
+- Ep10: closures in JS
+- Ep11: setTimeout + closures

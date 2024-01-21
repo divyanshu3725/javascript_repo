@@ -370,3 +370,151 @@
 // but let and const can be used to shadown any varialble because they won't cross their borders
 // block scope also follows lexical scope
 // all the scope rules that work on functions are valid for arrow functions also
+
+// CLOSURES
+// EXAMPLE 1
+// function x()
+// {
+//     var a = 7;
+//     function y()
+//     {
+//         console.log(a);
+//     };
+//     y();
+// };
+// x();
+// a closure is a function binded together with it's lexical environment
+// a closure is a combination of a function bundled together with references to the surrounding state (the lexical environment)
+// EXAMPLE 2
+// function x()
+// {
+//     var a = 7;
+//     return function y()
+//     {
+//         console.log(a);
+//     };
+// };
+// var val = x();
+// console.log(val);
+// val();
+// when functions are returned their lexical scope is also returned
+// so the entire closure is returned
+// EXERCISE 3
+// function x()
+// {
+//     var a = 7;
+//     function y()
+//     {
+//         console.log(a);
+//     };
+//     a = 100;
+//     return y;
+// };
+// var val = x();
+// console.log(val);
+// val();
+// EXERCISE 4
+// function z() {
+//     var b = 900;
+//     function x() {
+//         var a = 7;
+//         function y() {
+//             console.log(a,b);
+//         };
+//         y();
+//     };
+//     x();
+// };
+// z();
+// in this code
+// y formed a closure with scope of x and scope of z
+// USES OF CLOSURES
+// - Module Desgin Pattern
+// - Currying
+// - Functions like once
+// - Memoize
+// - Maintaining state in async world
+// - setTimeOuts
+// - Iterators
+// - and many more
+
+// SETTIMEOUT + CLOSURES
+// EXAMPLE 1
+// function x()
+// {
+//     var i = 1;
+//     setTimeout(() => {
+//         console.log(i);
+//     }, 3000);
+//     console.log('after the setTimeOut');
+// };
+// x();
+// settimeout doesn't make javascript wait
+// when javascript encounters the setTimeOut function, a timer is attached to the callback timer and javascript moves forwards
+// EXAMPLE 2
+// PRINT 1 2 3 IN INTERVALS OF ONE SECOND
+// function x()
+// {
+//     for(var i = 1; i<5; i++)
+//     {
+//         setTimeout(() => {
+//             console.log(i);
+//         }, i*1000); 
+//     };
+// };
+// x();
+// this won't work
+// why
+// when the first setTimeout with timer = 1 second is executed, it tries to find the value of i, i has been declared using the var keyword, so i isn't block scopoe, i is global scoped, so js engine searches for i in the global scope after seraching for it in the local block scope, then js engine find the value f i to 5 (because before 1 second the for loop as completely executed and the value of the variable i has been updated to 5)
+// EXAMPLE 3
+// USING LET TO SOLVE THE PROBLEM
+// function x()
+// {
+//     for(let i = 1; i<5; i++)
+//     {
+//         setTimeout(() => {
+//             console.log(i);
+//         }, i*1000); 
+//     };
+// };
+// x();
+// this will work
+// why
+// because a new variable i is created when a new block of the for loop is executed, each time a block of for loop is created the 
+// EXAMPLE 4
+// WITHOUT USING LET
+// function x()
+// {   
+//     for(var i = 1; i<=5; i++)
+//     {
+//         var y = function (i)
+//         {
+//             setTimeout(() => {
+//                 console.log(i);
+//             }, i*1000);
+//         };
+//         y(i);
+//     };
+// };
+// x();
+// EXAMPLE 5
+// WITHOUT MAKING A NEW FUNCTION
+function x() {
+    for (var i = 1; i <= 5; i++) {
+        setTimeout((i) => {
+            console.log(i);
+        }, i * 1000, i);
+    };
+};
+x();
+
+
+// functions are like heart of javascript
+// people pull thier hairs
+// time tide and javascript waits for none
+
+// in javascript, functions do their work and remember their lexical scope
+// similarly
+// in life, should do our duties and stay grounded
+
+// when javascript encounters a setTimeOut, it attaches a timer to it and moves forward
