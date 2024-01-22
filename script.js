@@ -499,15 +499,350 @@
 // x();
 // EXAMPLE 5
 // WITHOUT MAKING A NEW FUNCTION
-function x() {
-    for (var i = 1; i <= 5; i++) {
-        setTimeout((i) => {
-            console.log(i);
-        }, i * 1000, i);
-    };
-};
-x();
+// function x() {
+//     for (var i = 1; i <= 5; i++) {
+//         setTimeout((i) => {
+//             console.log(i);
+//         }, i * 1000, i);
+//     };
+// };
+// x();
 
+// FIRST CLASS FUNCTIONS
+// EXAMPLE 1
+// x();
+// function x()
+// {
+//     console.log('Hi');
+// };
+// this is a function statement
+// SECOND CLASS FUNCTIONS
+// x();
+// var x = function()
+// {
+//     console.log('Hi');
+// };
+// this is function expression
+// DIFFERENCE BETWEEN FUNCTION STATEMENT AND FUNCTION EXPRESSION
+// a function statement is hoisted with it's defintion so we can call a function (which has been declared as function statement) before declaring it
+// a function expression is also hoisted but with the value undefined so when we call a function (which has been declared as function expression) we get an error
+// function statement is also called a function declaration
+// EXAMPLE 3
+// function()
+// {
+//     console.log('hi');
+// };
+// this is an anonymous function
+// but according to ECMAScript specification a function statement should always have a name
+// so this will throw an error
+// anonymous functions are used in a place where functions are used as values 
+// EXAMPLE 4
+// var x = function()
+// {
+//     console.log('Hi');
+// };
+// x();
+// EXAMPLE 5
+// var x = function y()
+// {
+//     console.log('Hi');
+//     console.log(y);
+// };
+// x();
+// this is a named function expression
+// y();
+// but we cannot use functions like this
+// because y is not in the global scope
+// it's a local variable for the y() function
+// PARAMETERS V/S ARGUMENTS
+// parameters are like placeholder value or label values
+// arguments are the actual values that we pass to a function
+// FIRST CLASS FUNCTIONS
+// EXAMPLE 1
+// a function that takes a another function as argument or returns a function is called a first class function 
+// functions are first class citizens
+// the ability of functions to be used as values, makes functions first class citizens in JavaScript
+// function x(y)
+// {
+//     console.log('inside x');
+//     console.log('calling y');
+//     y();
+// };
+// function y()
+// {
+//     console.log('inside y');
+// };
+// x(y);
+// EXAMPLE 2
+// function x()
+// {
+//     console.log('inside x');
+//     function y()
+//     {
+//         console.log('inside y');
+//     };
+//     return y;
+// };
+// console.log(x);
+// let val = x();
+// console.log(val);
+// val();
+// ARROW FUNCTIONS
+
+// CALLBACK FUNCTIONS
+// EXAMPLE 1
+// function x(y)
+// {
+//     console.log('inside x');
+//     y();
+// };
+// function y()
+// {
+//     console.log('inside y');
+// };
+// x(y);
+// the function passed as argument to another function is called the callback function
+// and the function calling the callback function is called the callee
+// javascript is a synchronous single threaded language
+// but using callbacks we can do asynchronous things in javascript
+// EXAMPLE 2
+// setTimeout((x) => {
+//     console.log(x);
+// }, 2000,'Hi');
+// the function passed to this setTimeout function is a callback function
+// you know the working behind it
+// javascript won't wait for setTimeout
+// EXAMPLE 3
+// setTimeout(function func(x) {
+//     console.log(x);
+// }, 4000,'timer done');
+// function x(y)
+// {
+//     console.log('inside x');
+//     y();
+// }
+// function y()
+// {
+//     console.log('inside y');
+// }
+// x(y);
+// the async operation of setTimeout is possible because of callbacks
+// first the GEC will enter the  call stack
+// then the function x's EC will enter the call stack
+// then the function y's EC will enter the call stack
+// then y's EC will be popped of
+// then x's EC will be popped of 
+// then GEC will be popped of
+// then when the timer of 4 second has expired the callback function of the setTimeout function will enter the callstack
+// if any thing blocks the callstack that means it is blocking the main thread
+// if a function has heavy computation or operation it will block the main thread
+// we shouldn't block the main thread
+// and due to this reason we should use async operations for things that take time
+// if we don't use async then our main thread will be blocked
+// if in javascript functions were not first class citizens, we would not have this callback function
+// and if we didn't have callback functions we wouldn't be able to do async operations
+// EXAMPLE 4
+// EVENTLISTENERS
+// document.getElementById('btn').addEventListener('click',clickFunc);
+// function clickFunc()
+// {
+//     console.log('Hi');
+// };
+// the clickFunc here is a callback function
+// when javascript encounters this callback function
+// it put it into the web apis section
+// and whenever a click is made the callback function is pushed to the callback queue
+// EXAMPLE 5
+// MAINTAIN A BUTTON CLICK COUNT
+// function clickFunc()
+// {
+//     document.getElementById('btn').addEventListener('click',mainFunc);
+//     let i = 1;
+//     function mainFunc(){
+//         console.log('button click',i);
+//         i++;
+//     };
+//     return mainFunc;
+// };
+// clickFunc();
+// we could also use a global variable using the var keyword
+// but this is not a good approach
+// because the value of that global variable can be modified k
+// to see the event listeners attached to an element, go to elements then to event liseners and then click on the element whose event listener is to be interrogated
+// the event listener contains a scope object 
+// and this scope object contains the closure
+// EXAMPLE 6
+// WHY DO WE NEED TO REMOVE EVENTLISTENERS
+// because event listeners are heavy
+// whenever an event listeners exists, it forms a closure
+// if carries it's closure event when the callstack is empty
+// so we remove event listeners when we no longer need them
+// these closures and data which occupy space in memory slow down our page
+
+// EVENT LOOP
+// JavaScript is a synchronous single threaded language
+// it has one call stack
+// it can do one thing at a time
+// GEC
+// function a()
+// {
+//     console.log("a");
+// }
+// a();
+// console.log('End');
+// whenever javascript code execution starts, a GEC is created
+// first GEC is created
+// then it's kept in the callstack
+// then function a's EC is created
+// then it's pushed into the call stack
+// then function a's code is executed
+// a is logged into console
+// then function a's code execution ends
+// so function a's EC is popped of 
+// global execution context contains no more code, so it is also popped of the callstack
+// the only job of callstack is to executed whatever comes inside it
+// if we have to do some async operations, we will need some superpowers
+// call stack is present inside the javascript engine
+// js engine is inside browser
+// browser also has local storage, timer, url, 
+// for our code to use those feature, our code needs to use the web apis (which include setTimeout, DOM APIs, fetch(), localStorage, console, location)
+// for our code to use the web apis, we need the window
+// browser give the window object using which we can use the web apis
+// so we need to use window.webapi in order to use super powerful features of browser
+// but we don't need to use the window keyword because window is the global object,
+// so everything we try to access is accessed from the window
+// EXAMPLE 1
+// console.log("start");
+// setTimeout(() => {
+//     console.log('Hi');
+// }, 2000);
+// console.log("end");
+// GEC is created
+// 715 is reached
+// start is logged into console
+// setTimeout is reached
+// callback function is assigned a timer
+// 719 is reached
+// end is logged into console
+// GEC is deleted
+// when 5 second pass
+// callback function (present in web apis section) enters the callback queue
+// then event loop checks for the emptiness of call stack
+// event loop finds CS to be empty
+// event loop pushes this callback function into the call stack
+// EXAMPLE 2
+// console.log("Start");
+// document.getElementById("btn").addEventListener("click", function cb(){
+//     console.log("callback");
+// });
+// console.log("End");
+// WHY DO WE NEED THIS CALLBACK QUEUE
+// so that the callbacks get's executed in a specific and desired order prevening any unexpected behaviour
+// 
+// EXAMPLE 3
+// console.log('start');
+// setTimeout(() => {
+//     console.log('CB setTimeout');
+// }, 5000);
+// fetch("https://api.netfilx.com")
+// .then(function cbr(){
+//     console.log("cb netflix");
+// });
+// console.log('end');
+// the fetch function returns a promise
+// the cbr callback function is registered in the web apis 
+// the cbr callback function will be pushed to the callback queue when data is returned from the server (whom we are sending request to)
+// no no no, the cbr callback function won't be pushed to callback queue
+// it will be pushed to micro task queue
+// callback queue is the macro queue
+// the microtask queue has more priority than the macrotask queue
+// so event loop first checks the emptiness of callstack
+// if it's empty then it checks the micro task queue
+// if something is there, then it will be pushed to the callstack
+// then event loop goes and checks the macro task queue
+// what comes in microtask quque: callback functions of promises, mutation observers
+// javascript does only one thing at a time
+// but browser do multiple things at a time
+// callback queue is known as taks queue, macro task queue, 
+// event loop will give opporitunity to the callback queue only when all the stuff in the microtask queue has been resolved
+// if a function present in microtask queue, generates another function in microstask queue then this can lead to starvation of the functions in the callack queue 
+
+// JS ENGINE ARCHITECTURE
+// JRE is like a big container that have everything that is required to run code
+// it contains: 
+// - JS Engine
+// - APIs 
+// - Event Loop
+// - Microtask Queue
+// - Macrotask Queue
+// JRE is not possible wihtout JS Engine
+// Browsers can execute JS code because it has a JRE
+// Nodejs also has a JRE 
+// Nodejs can run javascript outside the browser
+// APIs are different for different environments
+// javascript is capable of being run in various devices because of JRE
+// APIs give superpowers
+// setTimeout API is present in the browser environment as well as in Node.JS enviornment
+// V8 is used in deno, nodejs and chrome
+// first javascript engine evolved on now is known as spider monkey
+// js engine is not a machine
+// js engine is a program
+// v8 is written in c++
+// JS ENGINE ARCHITECTURE
+// first step parsing (sourdce code to tokens to) (syntax parsing is done here) (tokesn into AST)
+// second step compilation and execution go hand in hand
+// javascript is JIT compiled just in time compilation
+// about interpreter: line is executed one by one
+// about compiler: code is compiled and is then executed
+// in interpreter execution is fast
+// in compiler we have more efficiency
+// JavaScript can behave as both
+// how it behaves is dependent on the JRE
+// when JS was created it was supposed to be interpreted
+// most of JS engines and Browsers nowadays use interpreter
+// JIT compilation is like best of the both worlds
+// AST goes to interpretor, interpreter generates byte code
+// this byte code is optimized with compiler
+// then this optimized byte code is sent for execution
+// execution is not possible without memory heap and callstack
+// GARBAGE COLLECTOR
+// tries to free up space
+// it uses mark and sweep algorithm
+// other forms of compilation that compiler does:
+// - inlining
+// - inline caching
+// - copy elision
+// the whole process is generic
+// V8 engine's interpreter is called ignition
+// V8 engine's compiler is called turbofan
+// orinoco and oilpan are V8's garbage collector
+
+// TRUST ISSUES WITH SETTIMEOUT
+// EXAMPLE 
+// setTimeout(() => {
+//     console.log('timer done');
+// }, 3000);
+// for(let i = 1; i<=10000; i++)
+// {
+// }
+// after 3000ms the setTimeout's callback will enter the callstack queue
+// and this callback will be executed when it enters the call stack
+// it will enter the callstack when it is empty
+// so callback of the setTimtout function won't get executed after 3000ms if the callstack isn't empty
+// and this causes trust issues with setTimeout
+// EXAMPLE 2
+// TRYING TO BLOCK THE MAIN THREAD
+console.log('start');
+setTimeout(() => {
+    console.log('inside setTimeout');
+}, 0);
+console.log('end');
+let current = Date.now();
+while(Date.now() <= current+2000)
+{
+
+};
+// we can use a setTimeout of timer 0ms if we want to defer some piece of code
 
 // functions are like heart of javascript
 // people pull thier hairs
