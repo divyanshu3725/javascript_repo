@@ -832,17 +832,104 @@
 // and this causes trust issues with setTimeout
 // EXAMPLE 2
 // TRYING TO BLOCK THE MAIN THREAD
-console.log('start');
-setTimeout(() => {
-    console.log('inside setTimeout');
-}, 0);
-console.log('end');
-let current = Date.now();
-while(Date.now() <= current+2000)
-{
-
-};
+// console.log('start');
+// setTimeout(() => {
+//     console.log('inside setTimeout');
+// }, 0);
+// console.log('end');
+// let current = Date.now();
+// while(Date.now() <= current+2000)
+// {
+// };
 // we can use a setTimeout of timer 0ms if we want to defer some piece of code
+
+// HIGHER ORDER FUNCTIONS
+// A function takes another functions as an argument or a function that returns another function is called a higher order function
+// EXAMPLE 1
+// function x()
+// {
+//     console.log('namaste');
+// };
+// function y(x)
+// {
+//     x();
+// };
+// y(x);
+// y is the higher order function
+// x is the callback function
+// EXAMPLE 2
+// TASK: calculate the area, preimeter, diameter of the circles whose radii are stored in an array
+// const radii = [1,2,3,4];
+// const area = function(arr)
+// {
+//     const output = [];
+//     for(let i = 0; i<radii.length; i++)
+//     {
+//         output.push(arr[i]*arr[i]*Math.PI);
+//     };
+//     return output
+// };
+// const perimeter = function(arr)
+// {
+//     const output = [];
+//     for(let i = 0; i<radii.length; i++)
+//     {
+//         output.push(2*arr[i]*Math.PI);
+//     };
+//     return output
+// };
+// const diameter = function(arr)
+// {
+//     const output = [];
+//     for(let i = 0; i<radii.length; i++)
+//     {
+//         output.push(2*arr[i]);
+//     };
+//     return output;
+// };
+// const areaArr = area(radii);
+// const perimeterArr = perimeter(radii);
+// const diameterArr = diameter(radii);
+// console.log(areaArr);
+// console.log(perimeterArr);
+// console.log(diameterArr);
+// problems in this code
+// we are violating DRY principle
+// EXAMPLE 3
+// const radii = [1,2,3,4];
+// const caculator = (func,arr) => arr.map(func);
+// const area = (radius) => radius*radius*Math.PI;
+// const perimerter = (radius) => 2*radius*Math.PI;
+// const diameter = (radius) => 2*radius;
+// console.log(caculator(area,radii));
+// console.log(caculator(perimerter,radii));
+// console.log(caculator(diameter,radii));
+// this is better code
+// this is functional programming
+// why is this code better
+// we have abstracted our code into smaller functions
+// every unit of function has it's own unique function
+// we are not violating DRY
+// EXAMPLE 3
+// TASK: make the caculator function exactly similar to the map function
+// const radii = [1,2,3,4];
+// Array.prototype.caculator = function(func){
+//     const output = [];
+//     for(let i = 0; i<this.length; i++)
+//     {
+//         output.push(func(this[i]));
+//     };
+//     return output;
+// };
+// const area = (radius) => radius*radius*Math.PI;
+// const perimerter = (radius) => 2*radius*Math.PI;
+// const diameter = (radius) => 2*radius;
+// console.log(radii.caculator(area));
+// console.log(radii.caculator(perimerter));
+// console.log(radii.caculator(diameter));
+// this is like a polyfill for map function
+
+
 
 // functions are like heart of javascript
 // people pull thier hairs
