@@ -23,3 +23,5 @@ Day 6 done (22/01/23)
 - Ep17: trust issues with setTimeout
 Day 7 done (23/01/23)
 - Ep18: Higher order functions
+Day 7 done (24/01/23)
+- Ep19; Map Filter Reduce 

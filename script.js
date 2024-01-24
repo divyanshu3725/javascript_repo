@@ -929,6 +929,114 @@
 // console.log(radii.caculator(diameter));
 // this is like a polyfill for map function
 
+// MAP
+// is used for transforming an array (by transforming we mean transforming the values of an array)
+// const arr = [1,2,3,4];
+// console.log(arr);
+// const newArr = arr.map(x => x.toString(2));
+// console.log(newArr);
+
+// FILTER
+// const arr = [1,2,3,4];
+// console.log(arr);
+// const evenArr = arr.filter(x => !(x%2));
+// console.log(evenArr);
+// const oddArr = arr.filter(x => (x%2));
+// console.log(oddArr);
+
+// REDUCE 
+// const arr = [1,2,3,4];
+// // using function instead of reduce
+// function sumOf(arr)
+// {
+//     let sum = 0;
+//     for(let i = 0; i<arr.length; i++)
+//     {
+//         sum+=arr[i];
+//     };
+//     return sum;
+// }
+// const sum = arr.reduce((initial,cur) => {
+//     initial+=cur;
+//     return initial;
+// },5);
+// console.log(sum);
+
+// FINDING MAX AND MIN IN ARRAY USING REDUCE FUNCTION
+// const arr = [1,2,3,4,5];
+// const max = arr.reduce((initial, current) => {
+//     if(current>initial)
+//     {
+//         initial = current;
+//     };
+//     return initial;
+// },-Infinity);
+// const min = arr.reduce((initial, current) => {
+//     if(current<initial)
+//     {
+//         initial = current;
+//     };
+//     return initial;
+// },Infinity);
+// console.log(max);
+// console.log(min);
+
+// FINDING FULLNAMES OF ALL THE USERS
+// const users = [
+//     {firstName: "narendra", lastName: "modi", age: 73},
+//     {firstName: "elon", lastName: "musk", age: 52},
+//     {firstName: "alakh", lastName: "pandey", age: 32},
+// ];
+// const fullNames = users.map(x => x.firstName + " " + x.lastName);
+// console.log(fullNames);
+
+// GROUP INTO HOUSES
+// const users = [
+//     {firstName: "Divyanshu", lastName: "Sahu", house: "galiliee"},
+//     {firstName: "Durgesh", lastName: "Krishan", house: "bethlehem"},
+//     {firstName: "Manish", lastName: "Singh", house: "nazreth"},
+//     {firstName: "Deepak", lastName: "Bareth", house: "ebenezer"},
+//     {firstName: "Babul", lastName: "Behra", house: "bethlehem"},
+//     {firstName: "Aryaman", lastName: "Singh", house: "ebenezer"},
+//     {firstName: "Tazneem", lastName: "Akhtar", house: "bethlehem"},
+//     {firstName: "Chaitanya", lastName: "Chandra", house: "galiliee"},
+//     {firstName: "Abhay", lastName: "Rathore", house: "ebenezer"},
+//     {firstName: "Roshan", lastName: "Pandey", house: "bethlehem"},
+// ];
+// const obj = users.reduce(function(initial, current){
+//     if(!initial[current.house])
+//     {
+//         initial[current.house] = 1;
+//     }
+//     else
+//     {
+//         initial[current.house]++;
+//     }
+//     return initial;
+// }, {});
+// console.log(obj);
+
+// GIVE THE LIST OF ALL THE STUDENTS IN A PARTICULAR HOUSE
+const users = [
+    {firstName: "Divyanshu", lastName: "Sahu", house: "galiliee"},
+    {firstName: "Durgesh", lastName: "Krishan", house: "bethlehem"},
+    {firstName: "Manish", lastName: "Singh", house: "nazreth"},
+    {firstName: "Deepak", lastName: "Bareth", house: "ebenezer"},
+    {firstName: "Babul", lastName: "Behra", house: "bethlehem"},
+    {firstName: "Aryaman", lastName: "Singh", house: "ebenezer"},
+    {firstName: "Tazneem", lastName: "Akhtar", house: "bethlehem"},
+    {firstName: "Chaitanya", lastName: "Chandra", house: "galiliee"},
+    {firstName: "Abhay", lastName: "Rathore", house: "ebenezer"},
+    {firstName: "Roshan", lastName: "Pandey", house: "bethlehem"},
+];
+const obj1 = users.filter( x => x.house=="galiliee").map( x => x.firstName+" "+x.lastName); 
+console.log(obj1);
+const obj2 = users.filter( x => x.house=="ebenezer").map( x => x.firstName+" "+x.lastName); 
+console.log(obj2);
+const obj3 = users.filter( x => x.house=="nazreth").map( x => x.firstName+" "+x.lastName); 
+console.log(obj3);
+const obj4 = users.filter( x => x.house=="bethlehem").map( x => x.firstName+" "+x.lastName); 
+console.log(obj4);
 
 
 // functions are like heart of javascript
