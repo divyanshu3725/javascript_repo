@@ -1017,26 +1017,173 @@
 // console.log(obj);
 
 // GIVE THE LIST OF ALL THE STUDENTS IN A PARTICULAR HOUSE
-const users = [
-    {firstName: "Divyanshu", lastName: "Sahu", house: "galiliee"},
-    {firstName: "Durgesh", lastName: "Krishan", house: "bethlehem"},
-    {firstName: "Manish", lastName: "Singh", house: "nazreth"},
-    {firstName: "Deepak", lastName: "Bareth", house: "ebenezer"},
-    {firstName: "Babul", lastName: "Behra", house: "bethlehem"},
-    {firstName: "Aryaman", lastName: "Singh", house: "ebenezer"},
-    {firstName: "Tazneem", lastName: "Akhtar", house: "bethlehem"},
-    {firstName: "Chaitanya", lastName: "Chandra", house: "galiliee"},
-    {firstName: "Abhay", lastName: "Rathore", house: "ebenezer"},
-    {firstName: "Roshan", lastName: "Pandey", house: "bethlehem"},
-];
-const obj1 = users.filter( x => x.house=="galiliee").map( x => x.firstName+" "+x.lastName); 
-console.log(obj1);
-const obj2 = users.filter( x => x.house=="ebenezer").map( x => x.firstName+" "+x.lastName); 
-console.log(obj2);
-const obj3 = users.filter( x => x.house=="nazreth").map( x => x.firstName+" "+x.lastName); 
-console.log(obj3);
-const obj4 = users.filter( x => x.house=="bethlehem").map( x => x.firstName+" "+x.lastName); 
-console.log(obj4);
+// const users = [
+//     {firstName: "Divyanshu", lastName: "Sahu", house: "galiliee"},
+//     {firstName: "Durgesh", lastName: "Krishan", house: "bethlehem"},
+//     {firstName: "Manish", lastName: "Singh", house: "nazreth"},
+//     {firstName: "Deepak", lastName: "Bareth", house: "ebenezer"},
+//     {firstName: "Babul", lastName: "Behra", house: "bethlehem"},
+//     {firstName: "Aryaman", lastName: "Singh", house: "ebenezer"},
+//     {firstName: "Tazneem", lastName: "Akhtar", house: "bethlehem"},
+//     {firstName: "Chaitanya", lastName: "Chandra", house: "galiliee"},
+//     {firstName: "Abhay", lastName: "Rathore", house: "ebenezer"},
+//     {firstName: "Roshan", lastName: "Pandey", house: "bethlehem"},
+// ];
+// const obj1 = users.filter( x => x.house=="galiliee").map( x => x.firstName+" "+x.lastName); 
+// console.log(obj1);
+// const obj2 = users.filter( x => x.house=="ebenezer").map( x => x.firstName+" "+x.lastName); 
+// console.log(obj2);
+// const obj3 = users.filter( x => x.house=="nazreth").map( x => x.firstName+" "+x.lastName); 
+// console.log(obj3);
+// const obj4 = users.filter( x => x.house=="bethlehem").map( x => x.firstName+" "+x.lastName); 
+// console.log(obj4);
+
+// CALLBACK HELL
+// console.log('Hello');
+// console.log('Chinu');
+// console.log('How are you?');
+// IF WE WANT TO EXECUTE second lone AFTER FIVE SECONDS
+// function func()
+// {
+//     console.log('this is inside the function');
+// };
+// setTimeout(func, 5000);
+// using callbacks is a powerful way to do async tasks in javascript
+// MIMICKING ECOMMERCE
+// const cart = ['shoes','kurta','pants'];
+// api.createOrder();
+// api.proceedToPayment();
+// api.showOrderSummary();
+// api.updateCart();
+// we can proceed to payment only after creating an order
+// we can showOrderSummary only after we have proceeded to payment
+// we can update cart only after we have shown the order summary
+// using callbacks to do the task;
+// api.createOrder(cart, function(){
+//     api.proceedToPayment(function(){
+//         api.showOrderSummary(function(){
+//             api.updateCart();
+//         });
+//     });
+// });
+// FIRST PROBLEM
+// our code is growing horizontally
+// it's becoming unreadable and unmanageable
+// this is called callback hell
+// this structure is called pyramid of doom
+// SECOND PROBLEM
+// is the inversion of control
+// when using callbacks we loose the control on our code
+// we have passed to proceedToPayment function to the createOrder function
+// we are blindly trusting the creaetOrder function that it will call the proceedToPayment function
+// we gave the control of proceedToPayment function to the createOrder function
+// createOrder function may be written by some intern or by some other developer
+// what if our callback function doesn't get called by the createOrder function
+// what is our callback function is called twice by the createOrder function
+// ASYNC PROGRAMMING IN JAVASCRIPT EXIST BECAUSE OF THE CONCEPT OF CALLBACKS
+
+// PROMISES
+// const cart = ['shoes','kurta','watch'];
+// createOrder(cart); // will return orderID
+// proceedToPayment(orderID); 
+// USING CALLBACKS TO DO THE TASK
+// createOrder(cart, function(){
+//     proceedToPayment(orderID);
+// })
+// USING PROMISES
+// const promiseObject =  createOrder(cart);
+// now the createOrder function won't take a callback function, it will just take a cart
+// this createOrder function will return a promise
+// promise is an object
+// this promise object will hold whatever this createOrder function will return to us
+// so when the createOrder(cart) is called it will return the promise object
+// this promise object won't contain the value initially
+// when the createOrder function returns a value, this value will be stored in the promiseObject
+// after we encounter the createOrder(cart), and after the promise object has been assigned to the promiseObject (which won't be containing any value) javascript to continue to execute rest of the lines
+// how we will carry on the tasks that are to be carried out after the completion of createOrder function
+// we will assign callback functions to the promiseObject use the .then syntax
+// promiseObject.then(function(){
+//     proceedToPayment();
+// });
+// this callback will be executed only after the createOrder function has returned a value
+// but how is then different from callbacks
+// because in case of callbacks we were passing the callback functions to the outer functions
+// but now in case of then we are attaching the callback functions to the promiseObjects
+// we aren't losing control
+// we haven't given the control of the proceedToPayment function to the createOrder function
+// the only job of the creaeteOrder function is to do it's work and then fill the promiseObject with the return value 
+// as soon as the promiseObject is filled with data our proceedToPayment function will be called automatically
+// when we used to use callbacks, we weren't sure that the outer function won't call the inner function, or the outer function will call the inner function twice
+// but using promises and then function we are assured that the callback function will be called only once 
+// EXAMPLE 
+// USING FETCH TO UNDERSTAND PROMISES
+// const GITHUB_API = "https://api.github.com/users/divyanshu3725";
+// const user = fetch(GITHUB_API);
+// user.then(function(a){
+//     console.log(a);
+// })
+// console.log(user);
+// the fetch function returns us a promise
+// we added breakpoint to the const user declaration
+// so we saw that initially the value of user object was undefined
+// but after the fetch function has done it's work the user object is not empty at all
+// the use object contains a promise
+// and this promise object contains prototype, promiseState, PromiseResult
+// the state of promise will be pending for a very short period of time
+// when repsonse is recieved, then the state changes to fulfilled, and then the promise object is fed a value
+// and then the then function pushes the callback function into the micro task queue
+// PROMISE OBJECTS ARE IMMUTABLE
+// we cannot mutate the data present inside the pormise object
+// WHAT IS PROMISE?
+// a promise is an object that represents eventual completion or failure of an async operation
+// a promise is a placehoolder for short period of time, untill we receive a value from an async operations
+// a promise object is a container for a future value
+// we solved inversion of control problem
+// SOLVING PYRAMID OF DOOM
+// const promiseObject = api.createOrder()
+// .then(function(orderID){
+//     return proceedToPayment(orderID);
+// })
+// .then(function(summary){
+//     return showOrderSummary(summary);
+// })
+// .then(function(updation){
+//     return updateWallet(updation);
+// });
+// if we don't use the return keyword then callbacks would be executed but data won't flow 
+// we would get undefined
+// EXAMPLE 2 (DEMONSTRATING PROMISE CHAINING WHICH TACKLES PYRAMID OF DOOM)
+// function first(start)
+// {
+//     return new Promise(function(resolve,reject){
+//         setTimeout(() => {
+//             resolve(start+' '+'first');
+//         }, 3000);
+//     });
+// };
+// function second(start)
+// {
+//     return start+' '+'second';
+// };
+// function third(start)
+// {
+//     return start+' '+'third';
+// };
+// const prom = first('start')
+// .then(function(val){
+//     console.log(val);
+//     // second(val);
+//     return second(val);
+// })
+// .then(function(val){
+//     console.log(val);
+//     // third(val);
+//     return third(val);
+// })
+// .then(function(val)
+// {
+//     console.log(val);
+// })
 
 
 // functions are like heart of javascript
