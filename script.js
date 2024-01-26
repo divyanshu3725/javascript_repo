@@ -1185,6 +1185,74 @@
 //     console.log(val);
 // })
 
+// CREATING A PROMISE
+// MIMICKING E-COMMERCE
+const cart = ['kurta', 'pants', 'shoes'];
+function validateCart(cart)
+{
+    // return false;
+    return true;
+}
+function createOrder(cart)
+{
+    const pr = new Promise(function(resolve,reject){
+        setTimeout(() => {
+            // create order
+            // validate cart
+            // orderID  
+            if(!validateCart(cart))
+            {
+                reject(new Error("cart is not valid"));
+            };
+            const orderID = 1234;
+            if(orderID)
+            {
+                resolve(orderID);
+            };
+        }, 3000);
+    });
+    return pr;
+}
+function proceedToPayment(orderID)
+{
+    const pr = new Promise(function(resolve,reject)
+    {
+        resolve('payment successful')
+    });
+    return pr;
+}
+createOrder(cart)
+.then(function(orderID)
+{
+    console.log(orderID);
+    return orderID;
+})
+.then(function(orderID)
+{
+    return proceedToPayment(orderID)
+})
+.then(function(paymentInfo){
+    console.log(paymentInfo);
+})
+.catch(function(err)
+{
+    console.log(err)
+})
+.then(function(){
+    console.log('no maater what happens I will be called');
+})
+// the promise object constructor takes a function which contains two callback function
+// our createOrder async function will takes 5 seconds to get completed
+// by that time the promise object will stay in pending state
+// we should handle errors
+// we can handle error using catch function
+// the then is the success callback
+// the catch is the failure callback
+// now we will chaining promises
+// don't forgest to use the returns keyword for maintaining the flow of data
+// the then function automatically returns a promise
+// the catch in the end will handle error occuring in any of the then blocks
+// catch block hanles all the error occuring in any then functions above it
 
 // functions are like heart of javascript
 // people pull thier hairs
