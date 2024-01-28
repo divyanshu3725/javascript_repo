@@ -1187,60 +1187,60 @@
 
 // CREATING A PROMISE
 // MIMICKING E-COMMERCE
-const cart = ['kurta', 'pants', 'shoes'];
-function validateCart(cart)
-{
-    // return false;
-    return true;
-}
-function createOrder(cart)
-{
-    const pr = new Promise(function(resolve,reject){
-        setTimeout(() => {
-            // create order
-            // validate cart
-            // orderID  
-            if(!validateCart(cart))
-            {
-                reject(new Error("cart is not valid"));
-            };
-            const orderID = 1234;
-            if(orderID)
-            {
-                resolve(orderID);
-            };
-        }, 3000);
-    });
-    return pr;
-}
-function proceedToPayment(orderID)
-{
-    const pr = new Promise(function(resolve,reject)
-    {
-        resolve('payment successful')
-    });
-    return pr;
-}
-createOrder(cart)
-.then(function(orderID)
-{
-    console.log(orderID);
-    return orderID;
-})
-.then(function(orderID)
-{
-    return proceedToPayment(orderID)
-})
-.then(function(paymentInfo){
-    console.log(paymentInfo);
-})
-.catch(function(err)
-{
-    console.log(err)
-})
-.then(function(){
-    console.log('no maater what happens I will be called');
-})
+// const cart = ['kurta', 'pants', 'shoes'];
+// function validateCart(cart)
+// {
+//     // return false;
+//     return true;
+// }
+// function createOrder(cart)
+// {
+//     const pr = new Promise(function(resolve,reject){
+//         setTimeout(() => {
+//             // create order
+//             // validate cart
+//             // orderID  
+//             if(!validateCart(cart))
+//             {
+//                 reject(new Error("cart is not valid"));
+//             };
+//             const orderID = 1234;
+//             if(orderID)
+//             {
+//                 resolve(orderID);
+//             };
+//         }, 3000);
+//     });
+//     return pr;
+// }
+// function proceedToPayment(orderID)
+// {
+//     const pr = new Promise(function(resolve,reject)
+//     {
+//         resolve('payment successful')
+//     });
+//     return pr;
+// }
+// createOrder(cart)
+// .then(function(orderID)
+// {
+//     console.log(orderID);
+//     return orderID;
+// })
+// .then(function(orderID)
+// {
+//     return proceedToPayment(orderID)
+// })
+// .then(function(paymentInfo){
+//     console.log(paymentInfo);
+// })
+// .catch(function(err)
+// {
+//     console.log(err)
+// })
+// .then(function(){
+//     console.log('no maater what happens I will be called');
+// })
 // the promise object constructor takes a function which contains two callback function
 // our createOrder async function will takes 5 seconds to get completed
 // by that time the promise object will stay in pending state
@@ -1253,6 +1253,299 @@ createOrder(cart)
 // the then function automatically returns a promise
 // the catch in the end will handle error occuring in any of the then blocks
 // catch block hanles all the error occuring in any then functions above it
+
+// PROMISE API
+// promise.all
+// takes an array of promises
+// make parallel api calls
+// returns an array of the results 
+// it will wait for all of them to finish
+// as soon as the promise.all function encounters an error promise.all will throw an error
+// EXAMPLE 1
+// const prom1 = new Promise(function(resolve,reject)
+// {
+//     setTimeout(() => {
+//         resolve('resval1');
+//     }, 2000);
+// });
+// const prom2 = new Promise(function(resolve,reject)
+// {
+//     setTimeout(() => {
+//         resolve('resval2');
+//     }, 3000);
+// });
+// const prom3 = new Promise(function(resolve,reject){
+//     setTimeout(() => {
+//         // reject('rejVal3');
+//         resolve('resVal3');
+//     }, 1000);
+// });
+// const promAll = Promise.all([prom1,prom2,prom3]);
+// promAll.then(function(val)
+// {
+//     console.log(val);
+// });
+// promise.allSettled
+// makes parallel api calls
+// returns an array of the results irrespective of failure or success of the promises 
+// const prom1 = new Promise(function(resolve,reject)
+// {
+//     setTimeout(() => {
+//         resolve('resval1');
+//     }, 2000);
+// });
+// const prom2 = new Promise(function(resolve,reject)
+// {
+//     setTimeout(() => {
+//         resolve('resval2');
+//     }, 3000);
+// });
+// const prom3 = new Promise(function(resolve,reject){
+//     setTimeout(() => {
+//         reject('rejVal3');
+//         // resolve('resVal3');
+//     }, 1000);
+// });
+// const promAll = Promise.allSettled([prom1,prom2,prom3]);
+// promAll.then(function(val)
+// {
+//     console.log(val);
+// });
+// promise.race
+// makes parallel api calls
+// returns the result of first promise that gets settled
+// if it's rejected, then the rejected value is returned
+// const prom1 = new Promise(function(resolve,reject)
+// {
+//     setTimeout(() => {
+//         resolve('resval1');
+//     }, 2000);
+// });
+// const prom2 = new Promise(function(resolve,reject)
+// {
+//     setTimeout(() => {
+//         // resolve('resval2');
+//         reject('rejval2');
+//     }, 3000);
+// });
+// const prom3 = new Promise(function(resolve,reject){
+//     setTimeout(() => {
+//         // reject('rejVal3');
+//         resolve('resVal3');
+//     }, 1000);
+// });
+// const promAll = Promise.race([prom1,prom2,prom3]);
+// promAll.then(function(val)
+// {
+//     console.log(val);
+// });
+// promise.any
+// returns the result of the first promise that gets resolved
+// throws error if all the errors are rejected
+// const prom1 = new Promise(function(resolve,reject)
+// {
+//     setTimeout(() => {
+//         // resolve('resval1');
+//         reject('rejval1');
+//     }, 2000);
+// });
+// const prom2 = new Promise(function(resolve,reject)
+// {
+//     setTimeout(() => {
+//         // resolve('resval2');
+//         reject('rejval2');
+//     }, 3000);
+// });
+// const prom3 = new Promise(function(resolve,reject){
+//     setTimeout(() => {
+//         // resolve('resVal3');
+//         reject('rejVal3');
+//     }, 1000);
+// });
+// const promAll = Promise.any([prom1,prom2,prom3]);
+// promAll.then(function(val)
+// {
+//     console.log(val);
+// });
+// we shouldn't have uncaught errors
+
+// ASYNCs
+// async is a keyword which is used before a function to make the function async
+// an async function always returns a promise
+// either we make an async function that returns a promise
+// or the async function will automatically return the returning value as a promise
+// if we don't return a promise, the async function will take the value, wrap it inside a promise and then it will return the promise
+// if we return a promise from the async function that it won't be wrapped inside another promise.
+// EXAMPLE 1
+// async function asFunc(param)
+// {
+//     return param;
+// };
+// const result = asFunc(2);
+// console.log(result);
+// result.then(function(val)
+// {
+//     console.log(val);
+// });
+// EXAMPLE 2
+// async function asFunc(a) {
+//         return new Promise((resolve,reject) => resolve(a));
+// };
+// const result = asFunc('a');
+// result.then(x => console.log(x))
+// AWAIT
+// async awit combo is used to handle promises
+// handling promises without async and await
+// const prom = new Promise((resolve,reject) => {
+//     resolve('prom res');
+// });
+// function getData(){
+//     prom.then((x) => console.log(x))
+// };
+// getData();
+// handling promises with async await
+// const prom = new Promise((resolve,reject) => {
+//     resolve('prom res');
+// });
+// async function getData(){
+//     const val1 = await prom;
+//     console.log(val1);
+// };
+// getData();
+// console.log('after getData');
+// the await keyword can only be used inside an async function
+// await keyword is used in front of a promise
+// difference between these two approaches
+// const prom = new Promise((resolve,reject) => {
+//     console.log('before setTimout');
+//     setTimeout(() => {
+//         resolve('prom res');
+//     }, 2000);
+//     console.log('after setTimout');
+// });
+// function getData()
+// {
+//     prom.then((x)=>console.log(x))
+//     console.log('after then');
+// };
+// async function getData(){
+//     const val1 = await prom;
+//     console.log('after await');
+// };
+// getData();
+// console.log('after getData');
+// wihtout using the async await keywords: 
+// - first before setTimeout will be printed
+// - then after setTimeout will be printed
+// - prom promise object's callbck will be registered
+// - then after then will be printed
+// - then after getData will be printed
+// - then when the promise gets resolved the return value of the promise that prom res will be printed
+// with using async await keywords
+// - first before setTimeout will be printed
+// - then after setTimeout will be printed
+// - then javascript reaches the statement containing the await keyword
+// - then javascript suspends the execution because it encountered an async operation
+// - then javascript will go to the line of code after the async function invocation
+// - then after getData will be printed
+// - then when the promise gets resolved the execution of the async function will begin
+// - and then after await will be printed
+// EXAMPLE 3
+// const prom1 = new Promise((resolve,reject) =>
+// {
+//     setTimeout(() => {
+//         resolve('prom res');
+//     }, 5000);
+// });
+// const prom2 = new Promise((resolve,reject) =>
+// {
+//     setTimeout(() => {
+//         resolve('prom res');
+//     }, 10000);
+// });
+// async function getData(){
+//     console.log('asfunc start');
+//     const val1 = await prom1;
+//     console.log('after await1');
+//     const val2 = await prom2;
+//     console.log('after await2');
+//     const val3 = await prom1;
+//     console.log('after await3');
+//     console.log('asfunc end');
+// };
+// getData();
+// console.log('after getData');
+// getData() is encountered
+// asfunc start is printed
+// async function is encountered
+// execution of asFunc will be suspended
+// when the last encountered promise (or as func) is settled, execution of asFunc is resumed
+// after await 1 is printed
+// another async function is encountered
+// execution of asFunc will be suspended
+// when the last encountered promise (or as func) is settled, execution of asFunc is resumed
+// after await 2 is printed
+// whenever await is ecnounterd execution of async function is suspended
+// whenever that particular awaited promise is fulfilled the async function is resumed
+// handling a fetch call using async await syntax
+// const GITHUB_API = "https://api.github.com/users/divyanshu3725";
+// async function asFunc(){
+//     const respo = await fetch(GITHUB_API);
+//     console.log(respo);
+//     const val = await respo.json();
+//     console.log(val);
+// };
+// console.log('before calling asFunc');
+// asFunc();
+// console.log('after calling asFunc');
+// the fetch function returns a response object
+// this response object is a readable stream
+// and this readable stream can be converted into a json
+// using the .json method
+// the .json method also returns a promise
+// so we will await that promise also
+// ERROR HANDLING (USING ASYNC AWAIT)
+// const GITHUB_API = "https://api.github.comusers/divyanshu3725";
+// async function asFunc(){
+//     try{
+//         const respo = await fetch(GITHUB_API);
+//         console.log(respo);
+//         const val = await respo.json();
+//         console.log(val);
+//     }
+//     catch(err)
+//     {
+//         console.log(err);
+//     }
+// };
+// console.log('before calling asFunc');
+// asFunc();
+// console.log('after calling asFunc');
+// ERROR HANDLING (USING CATCH METHOD)
+// const GITHUB_API = "https://api.github.comusers/divyanshu3725";
+// async function asFunc(){
+//     try{
+//         const respo = await fetch(GITHUB_API);
+//         console.log(respo);
+//         const val = await respo.json();
+//         console.log(val);
+//     }
+//     catch(err)
+//     {
+//         console.log(err);
+//     }
+// };
+// console.log('before calling asFunc');
+// asFunc().catch(err => console.log(err));
+// console.log('after calling asFunc');
+// INTERVIEW TIPS
+// first explain about async keyword
+// then explain where the await keyword can be used
+// then explain await is used handle promises
+// these promises are asynchronous
+// ASYNC AWAIT v/s PROMISE.THEN/CATCH
+// async await is just syntactic sugar for promise.then/catch
+
 
 // functions are like heart of javascript
 // people pull thier hairs
