@@ -1546,6 +1546,187 @@
 // ASYNC AWAIT v/s PROMISE.THEN/CATCH
 // async await is just syntactic sugar for promise.then/catch
 
+// THIS KEYWORD
+// THIS INSIDE GLOBAL SPACE
+// console.log(this);
+// this keyword in global space represents the global object
+// global object differ in different environments
+// in case of browsers, the window object is the global object
+// THIS INSIDE FUNCTION SCOPE (non strict mode)
+// function func()
+// {
+//     console.log(this);
+// };
+// func();
+// this inside function scope in non strict mode represents the window object
+// THIS INSIDE FUNCTION SCOPE (strict mode)
+// "use strict";
+// function func()
+// {
+//     console.log(this);
+// };
+// func();
+// window.func();
+// this inside function scope in strict mode is undefined
+// THIS SUBSTITUTION
+// if the value of this keyword is undefined or null, then it will be replaced by the window object, only in strict mode
+// INTERVIEW
+// what is the value of this keyword inside a function?
+// - value of this inside a function is undefined, but because javascript has something called this substitution, the value becomes the global object in case of non strict mode
+// ABOUT THIS IN FUNCTIONS
+// value of this depends on how the function is called
+// EXAMPLE 1
+// "use strict";
+// function func()
+// {
+//     console.log(this);
+// };
+// func();
+// window.func();
+// func() will give undefined
+// window.func() will give the window object
+// THIS INSIDE OBJECT'S METHOD
+// const obj = {
+//     a: 10,
+//     x: function(){
+//         console.log(this); // this will represent the object
+//     }
+// };
+// obj.x();
+// THIS INSIDE ARROW FUNCTIONS
+// arrow function do not have their own this, they take it's value from their lexical environment
+// const obj = {
+//     a: 10,
+//     b: this,
+//     x: ()=>{
+//         console.log(this); // this will represent the window object
+//     }
+// };
+// obj.x();
+// value of this in case of arrow function is the enclosing lexical context
+// const obj = {
+//     a: 10,
+//     x: function(){
+//         const y = () => {
+//             console.log(this);
+//         };
+//         y();
+//     }
+// };
+// obj.x();
+// THIS INSIDE DOM ELEMENT
+// references to the HTML element
+
+// CALL
+// const naam1 = {
+//     firstName: 'Chinu',
+//     lastName: 'Sahu',
+//     printFullName: function(){
+//         console.log(this.firstName+" "+this.lastName);
+//     },
+// };
+// const intro = function(age){
+//     console.log(`Hello I am ${this.firstName} ${this.lastName}. I am ${age} years old.`);
+// } 
+// naam1.printFullName();
+// const naam2 = {
+//     firstName: 'Divyanshu',
+//     lastName: 'Sahu'
+// };
+// // USING CALL FOR FUNCITON BORROWING (from another object)
+// naam1.printFullName.call(naam2);
+// // USING CALL FOR FUNCITON BORROWING
+// intro.call(naam1,21);
+
+// APPLY
+// const naam1 = {
+//     firstName: 'Chinu',
+//     lastName: 'Sahu',
+//     printFullName: function(){
+//         console.log(this.firstName+" "+this.lastName);
+//     },
+// };
+// const intro = function(age){
+//     console.log(`Hello I am ${this.firstName} ${this.lastName}. I am ${age} years old.`);
+// } 
+// naam1.printFullName();
+// const naam2 = {
+//     firstName: 'Divyanshu',
+//     lastName: 'Sahu'
+// };
+// // USING APPLY FOR FUNCITON BORROWING (from another object)
+// naam1.printFullName.apply(naam2);
+// // USING APPLY FOR FUNCITON BORROWING
+// intro.apply(naam1,[21]);
+
+// BIND
+// const naam1 = {
+//     firstName: 'Chinu',
+//     lastName: 'Sahu',
+//     printFullName: function(){
+//         console.log(this.firstName+" "+this.lastName);
+//     },
+// };
+// const intro = function(age,address){
+//     console.log(`Hello I am ${this.firstName} ${this.lastName}. I am ${age} years old. I live in ${address}.`);
+// } 
+// naam1.printFullName();
+// const naam2 = {
+//     firstName: 'Divyanshu',
+//     lastName: 'Sahu'
+// };
+// // USING CALL FOR FUNCITON BORROWING (from another object)
+// const newFunc1 = intro.bind(naam1,'21');
+// const newFunc2 = intro.bind(naam2,'22','Shimla');
+// newFunc1('Goa');
+// newFunc2();
+
+// ASYNC AND DEFER
+// HTML PARSING and LOADING OF SCRIPT 
+// LOADING SCRIPT involves FETCHING the script and EXECUTING it 
+// are boolean attributes which are used with the script tag to load external scripts efficiently into our webpage
+// not using ATTRIBUTE in SCRIPT TAG:
+// - HTML parsing starts
+// - when script is encountered
+// - script is fetched
+// - script is executed
+// - HTML parsin resumes
+// - summary: HTML parsing stops when script is encountered, and resumes when script is executed (after being fetched) 
+// using ASYNC ATTRIBUTE in SCRIPT TAG
+// - HTML parsin starts
+// - script with ASYNC attribute is encountered
+// - it's fetched asynchronously 
+// - after fetching, HTML parsing pauses, script execution starts
+// - after execution of script, HTML parsin is resumed
+// using DEFER ATTRIBUTE in SCRIPT TAG
+// - HTML parsing starts
+// - script with DEFER attribute is encountered
+// - it's fetched asynchronously
+// - script is fetched
+// - and when HTML parsin is done script execution starts
+// ASYNC v/s DEFER
+// async attribute doesn't gurantee the order of execution of scripts, but differ does 
+// use defer when scripts are dependent on each other
+// use async when scripts are independent of each other
+
+// LOCAL STORAGE AND SESSION STORAGE
+// web storage apis are used to store some data into the web browsers
+// these are key-value pairs of strings
+// SESSION STORAGE
+// - for a session
+// - when we visit a website/webapp a session starts
+// - when the window is closed (tab) the data is lost
+// - unlike cookies session storage data is not sent to the server (which make network request calls)
+// - session storage data offers a larger capacity
+// - in cookies we can store 4 thousand bytes of data
+// - in session storage we can store 5 MBs of data
+// LOCAL STORAGE
+// - is similar to session storage
+// - it doesn't come with an expiry
+// - even if we close the tab/window/system, local storage is not lost
+// - offers highest memory capactity 
+
+
 
 // functions are like heart of javascript
 // people pull thier hairs
