@@ -1710,21 +1710,128 @@
 // use async when scripts are independent of each other
 
 // LOCAL STORAGE AND SESSION STORAGE
-// web storage apis are used to store some data into the web browsers
-// these are key-value pairs of strings
+// web storage apis are used to store some data into the browser
+// this data is in the form of key value pairs of string
 // SESSION STORAGE
-// - for a session
-// - when we visit a website/webapp a session starts
-// - when the window is closed (tab) the data is lost
-// - unlike cookies session storage data is not sent to the server (which make network request calls)
-// - session storage data offers a larger capacity
-// - in cookies we can store 4 thousand bytes of data
-// - in session storage we can store 5 MBs of data
+// - data is stored for a session only
+// - session starts when the use opens the window  or the tab
+// - data is deleted when the user closes the tab or the window
+// - session storage data isn't sent to the server using network request calls
+// - session storage offers more space than cookies
+// - in cookies we can store some 4000 bytes of data
+// - in session storage we can store 5 mb of data
 // LOCAL STORAGE
-// - is similar to session storage
-// - it doesn't come with an expiry
-// - even if we close the tab/window/system, local storage is not lost
-// - offers highest memory capactity 
+// - is similar to session storage 
+// - it does't come with an expiry
+// - data won't be lost if we close the tab or the window or the system
+// - offers the highest memory capacity
+// - it's memory capacity depends on the device we are using , the browser we are using
+// - at least 5 MB
+// - getting data from local storage is faster than getting data after making a network call
+// SAME ORIGIN POLICY
+// - storage apis use same origin policy for security reasons
+// - origin comprises of three things: protocol, host, port
+// - if we have stored some data for the origin http://divyanshusahu.com
+// - then we can access this data from http://divyanshusahu.com/data.php 
+// - we cannot access this data from https://divyanshusahu.com/data.php
+// - we cannot access this data from https://blog.divyanshusahu.com
+// - we cannot access this data from https://blog.divyanshusahu.com:8080
+// SETTING A KEY VALUE PAIR
+// localStorage.setItem('key1','value1');
+// ACCESSING A KEY VALUE PAIR
+// console.log(localStorage.getItem('key1'));
+// REMOVING A KEY VALUE PAIR
+// localStorage.removeItem('key1');
+// console.log(localStorage.getItem('key1'));
+// CLEARING THE LOCAL STORAGE
+// localStorage.clear();
+// - we generally do not store key value pairs of strings
+// - we generally store some objects in local storage
+// PROBLEM 
+// const user = {
+//     name: 'chinu',
+// };
+// localStorage.setItem('user',user);
+// this occurs because there's problem in converting an object into a string
+// for this we need to use the JSON.stringify method
+// SOLUTION
+// const user = {
+//     name: 'chinu',
+// };
+// localStorage.setItem('user-copy',JSON.stringify(user));
+// console.log(localStorage.getItem('user-copy')); // but this logs a string
+// we want an object, so we will use the JSON.parse method
+// console.log(JSON.parse(localStorage.getItem('user-copy')));
+// MAKING  BUILT IN FUNCTIONS THAT CAN BE USED TO AUTOMATE WORKING WITH SOTRAGE
+// function setDataInLocalStorage(key,value)
+// {
+//     localStorage.setItem(key,JSON.stringify(value));
+// };
+// function getDataInLocalStorage(key)
+// {
+//     return JSON.parse(localStorage.getItem(key));
+// };
+// const obj = {
+//     name: 'chinu',
+//     age: 21,
+// };
+// setDataInLocalStorage('userObject',obj);
+// const data = getDataInLocalStorage('userObject');
+// console.log(data);
+
+// PROTOTYPE AND PROTOTYPAL INHERITANCE
+// let arr = ['chinu','divyanshu'];
+// a variable of a particular datatype has access to some built in function, methods and properties.
+// how? becuase everything we make in javascript has it's prototype attached to it. 
+// and this prototype is nothing but an object which contains several properties and methods
+// ACCESSING THE PROTOTYPE OF A USER CREATED OBJECT
+// console.log(arr.__proto__);
+// console.log(Array.prototype);
+// console.log(arr.__proto__.__proto__);
+// console.log(arr.__proto__.__proto__.__proto__);
+// returns an object
+// it's same as Array.prototype
+// even the prototype of arr has another prototype
+// and this prototype is the prototype of an object
+// and this prototype has no prototype anymore
+// it's null
+// this seems like a chain
+// and this chain is called prototype chain
+// everything in javascript is an object 
+// because everything in javascript at the end of prototype chain is an object
+// MAKING AN OBJECT A PROTOTYPE OF ANOTHER OBJECT
+// const companyData = {
+//     joiningYear: 2024,
+//     college: 'tier3',
+//     intro: function(){
+//         console.log(`I am from ${this.college} college and I joined the industry in ${this.joiningYear}`);
+//     }
+// };
+// const personalData = {
+//     college: 'tier1',
+//     married: 'no',
+//     state: 'chhattisgarh',
+// };
+// personalData.__proto__ = companyData;
+// console.log(personalData.married);
+// console.log(personalData.state);
+// console.log(personalData.joiningYear);
+// console.log(personalData.college);
+// personalData.intro();
+// the reason why we are able to access the data of the companyData object from the personalData object: because the prototype of the personalData has been set to the companyData object
+// wheever we try to access a property or a method on an object, engine first searches for it in the object, and then the prototype of it's object, and then in the prototype of that prototype, and this is prototype chain
+// EDITING THE PROTOTYPE
+// Array.prototype.newProp = 'newPropValue';
+// Array.prototype.newFunc = function(param)
+// {
+//     console.log(`the param passed to me is ${param}`);
+// };
+// const arr = [1,2,3,4];
+// console.log(arr.newProp);
+// arr.newFunc('sampleParameter');
+// WHY __PROTO__
+// - so that we don't end up changing the prototype by mistake
+
 
 
 
