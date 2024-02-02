@@ -1637,6 +1637,7 @@
 // naam1.printFullName.call(naam2);
 // // USING CALL FOR FUNCITON BORROWING
 // intro.call(naam1,21);
+// intro.call(naam2,22);
 
 // APPLY
 // const naam1 = {
@@ -1658,6 +1659,7 @@
 // naam1.printFullName.apply(naam2);
 // // USING APPLY FOR FUNCITON BORROWING
 // intro.apply(naam1,[21]);
+// intro.apply(naam2,[22]);
 
 // BIND
 // const naam1 = {
@@ -1832,8 +1834,55 @@
 // WHY __PROTO__
 // - so that we don't end up changing the prototype by mistake
 
+// POLYFILL FOR BIND
+// const obj = {
+//     firstName: 'chinu',
+//     lastName: 'sahu',
+// };
+// const printName = function(age, role)
+// {
+//     console.log(`I am ${this.firstName} ${this.lastName}, a ${age} years old ${role}`);
+// };
+// OUR POLYFILL SHOULD WORK LIKE THIS
+// let printObjName1 = printName.bind(obj);
+// let printObjName2 = printName.bind(obj,'22');
+// printObjName1('21');
+// printObjName2();
+// console.log(printObjName1);
+// console.log(printObjName2);
+// MY APPROACH
+// Function.prototype.myBind = function(...params)
+// {
+//     const obj = params[0];
+//     obj.func = this;
+//     const args = params.slice(1);
+//     // console.log(args);
+//     return function(moreArgs){
+//         // console.log(moreArgs);
+//         obj.func(args,moreArgs);
+//     };
+// };
+// const callthis = printObjName1.myBind(obj,'21');
+// callthis('developer');
+// console.log(obj);
+// THE PROBLEM WITH THIS POLYFILL:
+// - it attaches the function to the object
+// - but while using the bind method, we don't attach the function to the object
+// Function.prototype.myBind = function(...args)
+// {
+//     const func = this;
+//     const argsSet1 = args.slice(1);
+//     console.log(`the argsSet1 is ${argsSet1}`);
+//     return function(...argsSet2){
+//         console.log(`the argsSet2 is ${argsSet2}`);
+//         func.apply(args[0],[...argsSet1,...argsSet2])
+//     };
+// };
+// const callthis = printObjName1.myBind(obj,'21','developer');
+// callthis();
+// console.log(obj);
 
-
+// FUNCTION CURRYING
 
 // functions are like heart of javascript
 // people pull thier hairs
