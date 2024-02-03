@@ -1882,7 +1882,81 @@
 // callthis();
 // console.log(obj);
 
-// FUNCTION CURRYING
+// FUNCTION CURRYING (USING THE BIND METHOD)
+// function multiply(a,b)
+// {
+//     console.log(a*b);
+// };
+// const multiplyByTwo = multiply.bind(this,2);
+// multiplyByTwo(3);
+// const multiplyByThree = multiply.bind(this,3);
+// multiplyByThree(4);
+// DOUBT! why have we used this 
+
+// FUNCTION CURRYING (USING THE CLOSURES)
+// function multiply(a)
+// {
+//     return function(b)
+//     {
+//         console.log(a*b);
+//     };
+// };
+// const crossTwo = multiply(2);
+// crossTwo(3);
+
+// DEBOUNCING
+// MY APPROACH
+// let inputBtn = document.getElementById('input');
+// function betterFunc() {
+//     inputBtn.addEventListener('keydown', actualFunc);
+//     let a;
+//     function actualFunc(e) {
+//         clearTimeout(a);
+//         a = setTimeout(() => {
+//             console.log(e.target.value);
+//         }, 500);
+//     };
+// };
+// betterFunc();
+// MY SOLUTION AFTER SEEING SIR'S APPROACH
+// let inputBtn = document.getElementById('input');
+// function printSearch(a)
+// {
+//     console.log(a.target.value);
+// }
+// const betterFunc = doSomeMagic(printSearch,500);
+// function doSomeMagic(func,timer){
+//     let a;
+//     return function(e){
+//         clearTimeout(a);
+//         a = setTimeout(func, timer, e);
+//     };
+// };
+// inputBtn.addEventListener('keydown', betterFunc);
+// SIR'S APPROACH
+let inputBtn = document.getElementById('input');
+function printSearch(a)
+{
+    console.log(a.target.value);
+}
+const betterFunc = doSomeMagic(printSearch,500);
+function doSomeMagic(func,timer){
+    let a;
+    return function(e){
+        let context = this;
+        let args = arguments;
+        clearTimeout(a);
+        a = setTimeout(()=>{
+            func.apply(context,args);
+        },timer);
+    };
+};
+inputBtn.addEventListener('keydown', betterFunc);
+// HOW IS BETTER THAN THE PRIVOUS SOLUTION
+// because the doSomeMagic is know a generic function for doing debouncing
+// just pass the function to be debounced, the timer and see automatic debouncing
+// DOUBT! why did we use the apply function 
+
 
 // functions are like heart of javascript
 // people pull thier hairs
